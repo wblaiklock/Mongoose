@@ -35,8 +35,17 @@ router.post('/', async (req, res) => {
 router.put('/:id', async(req,res) => {
     try {
         const updatedFruit = await Fruit.findByIdAndUpdate(req.params.id,req.body);
-        
-    } catch {
+        res.json(updatedFruit);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+})
+
+router.delete('/:id', async(req, res) => {
+    try {
+        const deletedFruit = await Fruit.findByIdAndDelete(req.params.id);
+        res.json(deletedFruit)
+    } catch (error) {
         res.status(500).json(error);
     }
 })
